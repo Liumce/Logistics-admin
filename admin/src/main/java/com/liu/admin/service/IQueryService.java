@@ -15,5 +15,5 @@ public interface IQueryService {
     public Map<String,Object> getQuery(ParameterMap pm);
     public Map<String,Object> edit(ParameterMap pm);
     public Map<String,Object> add(ParameterMap pm, HttpSession session);
-    public Map<String,Object> del(String queryId);
+    public Map<String,Object> del(String trafficId);
 }

@@ -102,8 +102,8 @@ public class QueryService implements IQueryService {
                 String qxKey = pm.getString("qx");
                 pm.put(qxKey,newRights);
             }
-            System.out.println("query_desc="+pm.getString("query_desc"));
-            pm.put("query_desc", pm.getString("query_desc").trim());
+            System.out.println("traffic_name="+pm.getString("traffic_name"));
+            pm.put("traffic_name", pm.getString("traffic_name").trim());
             queryDao.updateRoleQX(pm);
         } catch (Exception e) {
             log.error("error", e);
@@ -115,8 +115,8 @@ public class QueryService implements IQueryService {
     @Override
     public Map<String, Object> add(ParameterMap pm,HttpSession session) {
         try {
-            pm.put("user_id",((User)session.getAttribute(Const.SESSION_USER)).getUserId());
-            pm.put("query_desc", pm.getString("query_desc").trim());
+            pm.put("traffic_id",((User)session.getAttribute(Const.SESSION_USER)).getUserId());
+            pm.put("traffic_name", pm.getString("traffic_name").trim());
             queryDao.addQuery(pm);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,13 +127,13 @@ public class QueryService implements IQueryService {
     }
 
     @Override
-    public Map<String, Object> del(String queryId) {
+    public Map<String, Object> del(String trafficId) {
         try {
-            if(Tools.isEmpty(queryId) || !Tools.isNumber(queryId)){
+            if(Tools.isEmpty(trafficId) || !Tools.isNumber(trafficId)){
                 return ReturnModel.getModel("你请求的是一个冒牌接口", "failed", null);
             }
-            queryDao.delQuery(queryId);
-            queryDao.delUserQuery(queryId);
+            queryDao.delQuery(trafficId);
+            queryDao.delUserRole(trafficId);
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             e.printStackTrace();

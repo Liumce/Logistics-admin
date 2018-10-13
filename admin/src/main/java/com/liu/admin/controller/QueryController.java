@@ -72,11 +72,11 @@ public class QueryController extends BaseController {
      * 删除角色
      * @return
      */
-    @RequestMapping(value="/del/{queryId}",method=RequestMethod.GET)
+    @RequestMapping(value="/del/{trafficId}",method=RequestMethod.GET)
     @ResponseBody
-    public Object del(@PathVariable("queryId") String queryId){
+    public Object del(@PathVariable("trafficId") String trafficId){
         if(!Jurisdiction.buttonJurisdiction(querys, "del",this.getSession())){return ReturnModel.getNotAuthModel();} //校验权限
-        return queryService.del(queryId);
+        return queryService.del(trafficId);
     }
 
 

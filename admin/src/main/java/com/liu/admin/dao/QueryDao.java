@@ -14,6 +14,6 @@ public interface QueryDao {
     public ParameterMap getRoleById(ParameterMap pm);
     public void updateRoleQX(ParameterMap pm);
     public void addQuery(ParameterMap pm);
-    public void delQuery(String queryId);
-    public void delUserQuery(String queryId);
+    public void delQuery(String trafficId);
+    public void delUserRole(String trafficId);
 }
