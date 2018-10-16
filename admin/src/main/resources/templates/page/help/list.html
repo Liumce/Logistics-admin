@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="include/css-head :: css-head">
+</head>
+<style>
+    textarea{
+        width:100%;
+        height:100px;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .chk_1{
+        display: none;
+    }
+    .chk_1 + label {
+        background-color: #FFF;
+        border: 1px solid #C1CACA;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 5px;
+        display: inline-block;
+        position: relative;
+        margin-right: 30px;
+    }
+    .chk_1 + label:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .chk_1:checked + label {
+        background-color: #ECF2F7;
+        border: 1px solid #92A1AC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        color: #243441;
+    }
+
+    .chk_1:checked + label:after {
+        content: '\2714';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #758794;
+        width: 100%;
+        text-align: center;
+        font-size: 1.4em;
+        padding: 1px 0 0 0;
+        vertical-align: text-top;
+    }
+    div.cbp label.font{
+        text-align: center;
+        font-size: 1.4em;
+        vertical-align: text-top;
+        margin-top: -15px;
+        margin-left: -10px;
+    }
+
+</style>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        西游记告诉我们：凡是有后台的妖怪都被接走了，
+        <small>凡是没后台的都被一棒子打死了</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 系统帮助</a></li>
+        <li class="active">系统手册</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">查询单号</h3>
+            <br><br>
+        </div>
+        <h2>代收货款 安全、快捷的货款回收服务</h2>
+        <hr>
+        <br>
+        提供“即日退”和“三日退”两种代收货款服务。替您收回货款后，在承诺的退款时效内将货款汇出，让您安全、及时地回笼资金。
+
+
+
+        <hr>
+        <br>即日退：<br>
+        •退款时效：收货人正常签收后24小时内汇款（国家法定节假日顺延）。
+        •收费标准：快递手续费最低一票5元，即日退费率3%，最高600元/票。物流最低25元/票，费率12‰，最高250元/票
+        •指定银行：工商银行、建设银行、农业银行（均仅限于个人借记卡账户）
+
+
+        <hr>
+        <br>三日退：<br>
+        •退款时效：收货人正常签收后三天内汇款（星期一至星期五可退，周末、节假日顺延）
+        •收费标准：快递手续费最低一票5元，三日退费率1.5%，最高300元/票。物流最低15元/票,费率8‰,最高150元/票
+
+        <hr>
+        <h4>
+            服务说明：
+            1.当您需要代收货款时，请在运单联或网单上填写代收货款金额。并填写《德邦物流代收货款客户账户资料登记卡》，保证填写的开户名称、收款银行、账号等信息准确无误，并请仔细核对发货人姓名及手机号等信息，否则退错或者严重影响您的退款时效。
+            2.发货时，需对您的货物进行开箱验货，请您予以配合；收货方无需征求发货人的同意可以对代收货款货物进行开箱验货，请您发货前与收货人协商好货物质量、规格等。 因您发错货物或者质量问题，导致收货人不签收的，德邦不承担任何责任。
+            3.当您需要取消代收货款、修改代收货款金额、更改收货人姓名时，您都需要出示或者传真客户联，请您妥善保管好运单客户联。
+        </h4>
+        </h3>
+    </div>
+
+</section>
+
+
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.core.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.excheck.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+</body>
+</html>

@@ -16,4 +16,5 @@ public interface QueryDao {
     public void addQuery(ParameterMap pm);
     public void delQuery(String trafficId);
     public void delUserRole(String trafficId);
+    public ParameterMap findMenu(String trafficId);
 }

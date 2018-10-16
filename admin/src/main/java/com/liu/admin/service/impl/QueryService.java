@@ -36,7 +36,7 @@ public class QueryService implements IQueryService {
 
 
     @Override
-    public List<ParameterMap> list() {
+    public List<ParameterMap> getAllQueryList() {
         return queryDao.list();
     }
 
@@ -141,5 +141,21 @@ public class QueryService implements IQueryService {
             return ReturnModel.getModel("error", "falied", null);
         }
         return ReturnModel.getModel("ok", "success", null);
+    }
+
+    @Override
+    public Map<String, Object> findMenu(String trafficId) {
+        ParameterMap menu = null;
+        try {
+            if(Tools.isEmpty(trafficId) || !Tools.isNumber(trafficId)){
+                return ReturnModel.getModel("你请求的是一个冒牌接口", "failed", null);
+            }
+            menu = queryDao.findMenu(trafficId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("add menu error", e);
+            return ReturnModel.getModel("error", "falied", null);
+        }
+        return ReturnModel.getModel("ok", "success", menu);
     }
 }

@@ -33,7 +33,7 @@ public class QueryController extends BaseController {
      */
     @RequestMapping(value="/list",method=RequestMethod.GET)
     public Object list(Model model){
-        model.addAttribute("querys", queryService.list());
+        model.addAttribute("querys", queryService.getAllQueryList());
         return "page/query/list";
     }
 
@@ -79,5 +79,11 @@ public class QueryController extends BaseController {
         return queryService.del(trafficId);
     }
 
+    @RequestMapping(value="/query/{traffic_id}",method=RequestMethod.GET)
+    @ResponseBody
+    public Object find(@PathVariable("traffic_id") String trafficId){
+        if(!Jurisdiction.buttonJurisdiction(querys, "query",this.getSession())){return ReturnModel.getNotAuthModel();} //校验权限
+        return queryService.findMenu(trafficId);
+    }
 
 }

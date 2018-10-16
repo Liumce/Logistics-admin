@@ -16,6 +16,7 @@
 		<typeAlias type="com.liu.admin.entity.Menu" alias="Menu"  />
 		<typeAlias type="com.liu.admin.entity.User" alias="user"  />
 		<typeAlias type="com.liu.admin.entity.Role" alias="role"  />
+		<typeAlias type="com.liu.admin.entity.Query" alias="query"  />
 		<typeAlias type="com.liu.admin.entity.Scientific" alias="scientific"  />
 		<typeAlias type="com.liu.admin.util.ParameterMap" alias="pm"/>
 		<typeAlias type="com.liu.admin.plugin.Page" alias="Page"/>
