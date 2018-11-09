@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="include/css-head :: css-head">
+</head>
+<style>
+    textarea{
+        width:100%;
+        height:100px;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .chk_1{
+        display: none;
+    }
+    .chk_1 + label {
+        background-color: #FFF;
+        border: 1px solid #C1CACA;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 5px;
+        display: inline-block;
+        position: relative;
+        margin-right: 30px;
+    }
+    .chk_1 + label:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .chk_1:checked + label {
+        background-color: #ECF2F7;
+        border: 1px solid #92A1AC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        color: #243441;
+    }
+
+    .chk_1:checked + label:after {
+        content: '\2714';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #758794;
+        width: 100%;
+        text-align: center;
+        font-size: 1.4em;
+        padding: 1px 0 0 0;
+        vertical-align: text-top;
+    }
+    div.cbp label.font{
+        text-align: center;
+        font-size: 1.4em;
+        vertical-align: text-top;
+        margin-top: -15px;
+        margin-left: -10px;
+    }
+
+</style>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        西游记告诉我们：凡是有后台的妖怪都被接走了，
+        <small>凡是没后台的都被一棒子打死了</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 业务管理</a></li>
+        <li class="active">接单管理</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">订单列表</h3>
+            <br><br>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="transferList" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>寄件人</th>
+                    <th>手机号</th>
+                    <th>上门地址</th>
+                    <th>详细地址</th>
+                    <th>收件人</th>
+                    <th>手机号</th>
+                    <th>上门地址</th>
+                    <th>详细地址</th>
+                    <th>物品重量(kg)</th>
+                    <th>备注</th>
+                    <th>接单员编号</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${QX.query == '1'}" th:each="transfer,stat :${transfers}">
+                <td th:text="${transfer.order_number}">订单编号</td>
+                <td th:text="${transfer.senter}">寄件人</td>
+                <td th:text="${transfer.senter_phone}">手机号</td>
+                <td th:text="${transfer.sent_address}">上门地址</td>
+                <td th:text="${transfer.sent_addmsg}">详细地址</td>
+                <td th:text="${transfer.collecter}">收件人</td>
+                <td th:text="${transfer.collect_phone}">手机号</td>
+                <td th:text="${transfer.collect_address}">上门地址</td>
+                <td th:text="${transfer.collect_addmsg}">详细地址</td>
+                <td th:text="${transfer.weight}">物品重量(kg)</td>
+                <td th:text="${transfer.note}">备注</td>
+                <td th:text="${transfer.salesman_id}">接单员编号</td>
+                <td th:text="${transfer.price}">价格</td>
+                <td>
+                    <!--
+                    <button class="btn btn-primary" data-toggle="modal" orderId="${transfer.order_id}" data-target="#myModal">
+                        接单
+                    </button>
+                    -->
+                    <div th:if="${transfer.shipment_status == '0'}" id="orderModal" class="btn btn-success" th:attr="orderid=${transfer.order_id}">接单</div>
+                    <div th:unless="${transfer.shipment_status == '0'}"  class="label label-info" >已接单</div>
+                    
+                    <span data-toggle="tooltip" title="权限不够" th:unless="${QX.edit == '1' || QX.add == '1' || QX.del == '1'}" ><i class="fa fa-lock"></i> 无权限</span>
+
+                </td>
+                </tr>
+                <tr th:unless="${QX.query == '1'}" >
+                    <td colspan="7" align="center">
+                        <h2>此用户无权限查看该页面</h2>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</section>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增接单员信息
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <label for="salesman_id" class="col-sm-2 control-label">接单员编号</label>
+                <div class="col-sm-10">
+
+                        <input type="text" class="form-control" name="salesman_id" value="" id="salesman_id" placeholder="请输入您的编号">
+                    <div class="btn btn-info" id="submit">提交</div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.core.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.excheck.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+<!--<script th:src="@{/js/transfer.js}"></script>-->
+<script>
+    var orderId="";
+    $(function() {
+        //提示框
+        $("[data-toggle='tooltip']").tooltip();
+        //表格分页
+        $('#transferList').DataTable({
+            "scrollX": true,
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            "pagingType": "full_numbers",
+            "pageLength": 10
+        });
+
+        $("#orderModal").click(function(){
+            $("#myModal").modal("show");
+            orderId = $(this).attr("orderid");
+        });
+
+        //确认按钮
+        $("#submit").click(function () {
+            var salesmanId = $("input[name='salesman_id']").val();
+            if(checkAccount(salesmanId)){
+                $.ajax({
+                    type: "post",
+                    url: _ctx+"/transfer/edit",
+                    cache: false,
+                    dataType: "json",
+                    data: {order_id: orderId, salesman_id: salesmanId,shipment_status:"1",t_:new Date().getTime()},
+                    success: function (data) {
+                        if (data.status == 'success') {
+
+                            window.location.href = window.location.href;
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+
+        });
+
+//        //确认按钮
+//        $("#btn-transfer").click(function(){
+//            var ids="";
+//            $("input[name='orderids']:checked").each(function(){
+//                ids = ids + $(this).val() +",";
+//            });
+//            var salesmanId = $("input[name='salesman_id']").val();
+//            $.ajax({
+//                type:"POST",
+//                url:_ctx+"/transfer/editTransfer",
+//                cache:false,
+//                dataType:"json",
+//                data:{order_id:orderId,ids:ids,salesman_id:salesmanId},
+//                success:function(data){
+//                    if(data.status == 'success'){
+//                        window.location.href= window.location.href;
+//                    }else{
+//                        alert(data.msg);
+//                    }
+//                }
+//            });
+//        });
+//    })
+
+    //编辑用户
+    function editTransfer(order_id,salesman_id){
+        console.log(order_id+","+salesman_id+",");
+        reloadModelData(_ctx+"/transfer/edit","编辑接单信息","更新",order_id,"",salesman_id,"","edit");
+        $("#transferModal").modal("show");
+    }
+
+        //验证数据
+        function checkAccount(salesman_id) {
+            if (salesman_id == "") {
+                $("input[name='salesman_id']").focus();
+                alert("编号不能为空");
+                return false;
+            }
+            return true;
+        }
+
+        //加载模态框的数据
+        function reloadModelData(url, order_number, salesman_id) {
+            $("#transferModal #usermodelHead").text(title);
+            $("input[name='url']").val(url);
+            $("input[name='order_number']").val(order_number);
+            $("input[name='salesman_id']").val(salesman_id);
+        }
+
+
+        var input = document.getElementById("imgfile");
+        if (typeof (FileReader) === 'undefined') {
+            result.innerHTML = "抱歉，你的浏览器不支持 FileReader，请使用现代浏览器操作！";
+            input.setAttribute('disabled', 'disabled');
+        } else {
+            input.addEventListener('change', readFile, false);
+        }
+    })
+</script>
+</body>
+</html>

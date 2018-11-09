@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="include/css-head :: css-head">
+</head>
+<style>
+    textarea{
+        width:100%;
+        height:100px;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .chk_1{
+        display: none;
+    }
+    .chk_1 + label {
+        background-color: #FFF;
+        border: 1px solid #C1CACA;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 5px;
+        display: inline-block;
+        position: relative;
+        margin-right: 30px;
+    }
+    .chk_1 + label:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .chk_1:checked + label {
+        background-color: #ECF2F7;
+        border: 1px solid #92A1AC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        color: #243441;
+    }
+
+    .chk_1:checked + label:after {
+        content: '\2714';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #758794;
+        width: 100%;
+        text-align: center;
+        font-size: 1.4em;
+        padding: 1px 0 0 0;
+        vertical-align: text-top;
+    }
+    div.cbp label.font{
+        text-align: center;
+        font-size: 1.4em;
+        vertical-align: text-top;
+        margin-top: -15px;
+        margin-left: -10px;
+    }
+
+</style>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        西游记告诉我们：凡是有后台的妖怪都被接走了，
+        <small>凡是没后台的都被一棒子打死了</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 业务管理</a></li>
+        <li class="active">接单管理</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">接单管理</h3>
+            <br><br>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="transferList" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>寄件人</th>
+                    <th>手机号</th>
+                    <th>上门地址</th>
+                    <th>详细地址</th>
+                    <th>收件人</th>
+                    <th>手机号</th>
+                    <th>上门地址</th>
+                    <th>详细地址</th>
+                    <th>物品重量(kg)</th>
+                    <th>备注</th>
+                    <th>接单员编号</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${QX.query == '1'}" th:each="transfer,stat:${transfers}">
+                    <!--<td th:text="${stat.count}">1</td>-->
+                    <td th:text="${transfer.order_number}">订单编号</td>
+                    <td th:text="${transfer.senter}">寄件人</td>
+                    <td th:text="${transfer.senter_phone}">手机号</td>
+                    <td th:text="${transfer.sent_address}">上门地址</td>
+                    <td th:text="${transfer.sent_addmsg}">详细地址</td>
+                    <td th:text="${transfer.collecter}">收件人</td>
+                    <td th:text="${transfer.collect_phone}">手机号</td>
+                    <td th:text="${transfer.collect_address}">上门地址</td>
+                    <td th:text="${transfer.collect_addmsg}">详细地址</td>
+                    <td th:text="${transfer.weight}">物品重量(kg)</td>
+                    <td th:text="${transfer.note}">备注</td>
+                    <td th:text="${transfer.salesman_id}">接单员编号</td>
+                    <td th:text="${transfer.price}">价格</td>
+
+                   <!-- <td>
+                        <div th:if="${query.traffic_id != 1 || meid == '1'}">
+                            <h3>没有该单号物流信息</h3>
+                        </div>
+                        <div th:if="${query.traffic_id == 1 && meid != '1'}">
+                            <h3>这是您的单号物流信息</h3>
+                            &lt;!&ndash;<span><i class="fa fa-lock"></i></span>&ndash;&gt;
+                        </div>
+                    </td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</section>
+
+
+<!-- 权限分配的模态框 -->
+<div class="modal fade" id="qxModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="modelHead">编辑权限</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="qx" value="">
+                <input type="hidden" name="order_number" value="">
+                <div class="zTreeDemoBackground left">
+                    <ul id="transferTree" class="ztree"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" id="submit-qxBtn" >接单</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 新增或修改的模态框 -->
+
+<!-- 新增或修改的模态框 -->
+<div class="modal fade" id="roleModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" name="order_number" value="0"/>
+                    <input type="hidden" name="url" value="/"/>
+                    <div class="form-group">
+                        <a class="btn btn-app" id="likes" name="likes">
+                            <span class="badge bg-red">77</span>
+                            <i class="fa fa-heart-o"></i> Likes
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" id="submit-roleBtn" >接单</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.core.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.excheck.min.js}"></script>
+
+
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+<script th:src="@{/dist/js/adminlte.js}"></script>
+<script th:src="@{/js/transfer.js}"></script>
+<!--
+<script>
+    $(function(){
+        //提示框
+        $("[data-toggle='tooltip']").tooltip();
+        //表格分页
+        $('#roleList').DataTable({
+            "scrollX"	  : true,
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false,
+            "pagingType"  : "full_numbers",
+            "pageLength"  : 10
+        });
+
+        $("#addUser").click(function(){
+            reloadModelData(_ctx+"/user/add","添加用户","添加","","","","","","","add");
+            $("#userModal").modal("show");
+        });
+
+
+    //加载模态框的数据
+    function reloadModelData(url,title,btntext,user_id,pics,oldpath,username,nick_name,password,type){
+        $("#userModal #usermodelHead").text(title);
+        $("#userModal #imgSubmit").text(btntext);
+        $("#showImg").attr("src",oldpath);
+        $("input[name='url']").val(url);
+        $("input[name='user_id']").val(user_id);
+        $("input[name='pics']").val(pics);
+        $("input[name='oldpath']").val(oldpath);
+        $("input[name='username']").val(username);
+        $("input[name='nick_name']").val(nick_name);
+        $("input[name='password']").val(password);
+        if(type == 'add'){
+            $("input[name='username']").attr("disabled",false);
+        }else{
+            $("input[name='username']").attr("disabled",true);
+        }
+    }
+
+    var input = document.getElementById("imgfile");
+    if (typeof (FileReader) === 'undefined') {
+        result.innerHTML = "抱歉，你的浏览器不支持 FileReader，请使用现代浏览器操作！";
+        input.setAttribute('disabled', 'disabled');
+    } else {
+        input.addEventListener('change', readFile, false);
+    }
+    function readFile() {
+        var file = this.files[0];
+        //判断是否是图片类型
+        if (!/image\/\w+/.test(file.type)) {
+            alert("只能选择图片");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            base64Code=this.result;
+            $("#userModal input[name='pics']").val(this.result);
+            $("#showImg").attr("src",this.result);
+        }
+    }
+</script>
+-->
+
+</body>
+</html>

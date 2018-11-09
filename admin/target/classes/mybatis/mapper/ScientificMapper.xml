@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.admin.dao.ScientificDao" >
+
+    <select id="list"  resultType="pm">
+        SELECT
+        scientific_id
+        author_id,
+        author_name,
+        author_gain,
+        gain_origin,
+        gain_gettime,
+        paper_phase,
+        type_grade,
+        coo_ranking
+        from
+        sys_scientific
+    </select>
+
+    <select id="getScientificById" parameterType="pm"  resultType="pm">
+        SELECT
+        scientific_id
+        author_id,
+        author_name,
+        author_gain,
+        gain_origin,
+        gain_gettime,
+        paper_phase,
+        type_grade,
+        coo_ranking
+        from
+        sys_scientific
+        where
+        author_id=#{author_id}
+    </select>
+
+    <select id="getScientificByuId" parameterType="pm"  resultType="pm">
+        SELECT
+        id,
+        user_id,
+        author_id
+        from
+        sys_user_scientific
+        where
+        user_id=#{user_id}
+    </select>
+
+    <update id="updateScientificQX" parameterType="pm">
+        update sys_scientific set
+        author_id=#{author_id}
+        <if test="author_name != null and author_name != ''">
+            ,author_name = #{author_name}
+        </if>
+        <if test="author_gain != null and author_gain != ''">
+            ,author_gain = #{author_gain}
+        </if>
+        <if test="gain_origin != null and gain_origin != ''">
+            ,gain_origin = #{gain_origin}
+        </if>
+        <if test="gain_gettime != null and gain_gettime != ''">
+            ,gain_gettime = #{gain_gettime}
+        </if>
+        <if test="paper_phase != null and paper_phase != ''">
+            ,paper_phase = #{paper_phase}
+        </if>
+        <if test="type_grade != null and type_grade != ''">
+            ,type_grade = #{type_grade}
+        </if>
+        <if test="coo_ranking != null and coo_ranking != ''">
+            ,coo_ranking = #{coo_ranking}
+        </if>
+        where 1=1 and author_id=#{author_id}
+    </update>
+
+    <insert id="addScientific" parameterType="pm">
+        insert into sys_scientific(
+        author_name,
+        author_gain,
+        author_id
+        )values(
+        #{author_name},
+        #{author_gain},
+        #{author_id}
+        )
+    </insert>
+
+    <delete id="delScientific" parameterType="pm">
+        delete from sys_scientific where author_id=#{author_id}
+    </delete>
+    <delete id="delUserScientific" parameterType="pm">
+        delete from sys_user_scientific where author_id=#{author_id}
+    </delete>
+
+</mapper>

@@ -8,90 +8,32 @@ import java.util.Date;
  */
 public class Query {
 
-    private Integer trafficId;
-    private String trafficName;
-    private Date sendTime;
-    private String sendAddress;
-    private String trafficStatus;
-    private String trafficSamanName;
-    private String trafficSamanPhone;
-    private Integer trafficSamanSarId;
+
     private Integer orderId;
+    private String senter;
+    private String senterPhone;
+    private String sentAddress;
+    private String sentAddMsg;
+    private String collecter;
+    private String collectPhone;
+    private String collectAddress;
+    private String weight;
+    private String note;
+    private Integer salesmanId;
 
-    public Query(Integer trafficId, String trafficName, Date sendTime, String sendAddress, String trafficStatus, String trafficSamanName, String trafficSamanPhone, Integer trafficSamanSarId, Integer orderId) {
-        this.trafficId = trafficId;
-        this.trafficName = trafficName;
-        this.sendTime = sendTime;
-        this.sendAddress = sendAddress;
-        this.trafficStatus = trafficStatus;
-        this.trafficSamanName = trafficSamanName;
-        this.trafficSamanPhone = trafficSamanPhone;
-        this.trafficSamanSarId = trafficSamanSarId;
+
+    public Query(Integer orderId, String senter, String senterPhone, String sentAddress, String sentAddMsg, String collecter, String collectPhone, String collectAddress, String weight, String note, Integer salesmanId) {
         this.orderId = orderId;
-    }
-
-    public Integer getTrafficId() {
-        return trafficId;
-    }
-
-    public void setTrafficId(Integer trafficId) {
-        this.trafficId = trafficId;
-    }
-
-    public String getTrafficName() {
-        return trafficName;
-    }
-
-    public void setTrafficName(String trafficName) {
-        this.trafficName = trafficName;
-    }
-
-    public Date getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
-    }
-
-    public String getSendAddress() {
-        return sendAddress;
-    }
-
-    public void setSendAddress(String sendAddress) {
-        this.sendAddress = sendAddress;
-    }
-
-    public String getTrafficStatus() {
-        return trafficStatus;
-    }
-
-    public void setTrafficStatus(String trafficStatus) {
-        this.trafficStatus = trafficStatus;
-    }
-
-    public String getTrafficSamanName() {
-        return trafficSamanName;
-    }
-
-    public void setTrafficSamanName(String trafficSamanName) {
-        this.trafficSamanName = trafficSamanName;
-    }
-
-    public String getTrafficSamanPhone() {
-        return trafficSamanPhone;
-    }
-
-    public void setTrafficSamanPhone(String trafficSamanPhone) {
-        this.trafficSamanPhone = trafficSamanPhone;
-    }
-
-    public Integer getTrafficSamanSarId() {
-        return trafficSamanSarId;
-    }
-
-    public void setTrafficSamanSarId(Integer trafficSamanSarId) {
-        this.trafficSamanSarId = trafficSamanSarId;
+        this.senter = senter;
+        this.senterPhone = senterPhone;
+        this.sentAddress = sentAddress;
+        this.sentAddMsg = sentAddMsg;
+        this.collecter = collecter;
+        this.collectPhone = collectPhone;
+        this.collectAddress = collectAddress;
+        this.weight = weight;
+        this.note = note;
+        this.salesmanId = salesmanId;
     }
 
     public Integer getOrderId() {
@@ -102,18 +44,100 @@ public class Query {
         this.orderId = orderId;
     }
 
+    public String getSenter() {
+        return senter;
+    }
+
+    public void setSenter(String senter) {
+        this.senter = senter;
+    }
+
+    public String getSenterPhone() {
+        return senterPhone;
+    }
+
+    public void setSenterPhone(String senterPhone) {
+        this.senterPhone = senterPhone;
+    }
+
+    public String getSentAddress() {
+        return sentAddress;
+    }
+
+    public void setSentAddress(String sentAddress) {
+        this.sentAddress = sentAddress;
+    }
+
+    public String getSentAddMsg() {
+        return sentAddMsg;
+    }
+
+    public void setSentAddMsg(String sentAddMsg) {
+        this.sentAddMsg = sentAddMsg;
+    }
+
+    public String getCollecter() {
+        return collecter;
+    }
+
+    public void setCollecter(String collecter) {
+        this.collecter = collecter;
+    }
+
+    public String getCollectPhone() {
+        return collectPhone;
+    }
+
+    public void setCollectPhone(String collectPhone) {
+        this.collectPhone = collectPhone;
+    }
+
+    public String getCollectAddress() {
+        return collectAddress;
+    }
+
+    public void setCollectAddress(String collectAddress) {
+        this.collectAddress = collectAddress;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Integer getSalesmanId() {
+        return salesmanId;
+    }
+
+    public void setSalesmanId(Integer salesmanId) {
+        this.salesmanId = salesmanId;
+    }
+
     @Override
     public String toString() {
-        return "Query{" +
-                "trafficId=" + trafficId +
-                ", trafficName='" + trafficName + '\'' +
-                ", sendTime=" + sendTime +
-                ", sendAddress='" + sendAddress + '\'' +
-                ", trafficStatus='" + trafficStatus + '\'' +
-                ", trafficSamanName='" + trafficSamanName + '\'' +
-                ", trafficSamanPhone='" + trafficSamanPhone + '\'' +
-                ", trafficSamanSarId=" + trafficSamanSarId +
-                ", orderId=" + orderId +
+        return "Order{" +
+                "orderId=" + orderId +
+                ", senter='" + senter + '\'' +
+                ", senterPhone='" + senterPhone + '\'' +
+                ", sentAddress='" + sentAddress + '\'' +
+                ", sentAddMsg='" + sentAddMsg + '\'' +
+                ", collecter='" + collecter + '\'' +
+                ", collectPhone='" + collectPhone + '\'' +
+                ", collectAddress='" + collectAddress + '\'' +
+                ", weight='" + weight + '\'' +
+                ", note='" + note + '\'' +
+                ", salesmanId=" + salesmanId +
                 '}';
     }
 }

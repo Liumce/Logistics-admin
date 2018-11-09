@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.admin.dao.OrderDao" >
+	
+	<select id="list"  resultType="pm">
+		SELECT 
+			traffic_id,
+			traffic_name,
+			send_time,
+			send_address,
+			traffic_status,
+			traffic_saman_id,
+			traffic_saman_name,
+			traffic_saman_phone,
+			traffic_saman_carid,
+			order_id
+		from
+			sys_traffic
+	</select>
+
+	<select id="getOrderByuId" parameterType="pm"  resultType="pm">
+		SELECT 
+			id,
+			traffic_id,
+			order_id
+		from 
+			sys_traffic_order
+		where 
+			traffic_id=#{traffic_id}
+	</select>
+	
+	<insert id="addOrder" parameterType="pm">
+		insert into sys_order(
+			senter,
+			senter_phone,
+			sent_address,
+			sent_addmsg,
+			collecter,
+			collect_phone,
+			collect_address,
+			collect_addmsg,
+			weight,
+			note,
+			salesman_id,
+			price,
+			order_number
+		)values(
+			#{senter},
+			#{senter_phone},
+			#{sent_address},
+			#{sent_addmsg},
+			#{collecter},
+			#{collect_phone},
+			#{collect_address},
+			#{collect_addmsg},
+			#{weight},
+			#{note},
+			#{salesman_id},
+			#{price},
+			#{order_number}
+		)
+	</insert>
+
+	<update id="editOrder" parameterType="pm">
+		update sys_order set order_id=#{order_id}
+		<if test="status != null and status != ''">
+			,shipment_status=#{status}
+		</if>
+		WHERE order_id=#{order_id}
+	</update>
+ 
+</mapper>

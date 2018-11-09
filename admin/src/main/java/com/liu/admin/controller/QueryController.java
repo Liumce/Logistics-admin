@@ -28,7 +28,7 @@ public class QueryController extends BaseController {
     private IQueryService queryService;
 
     /**
-     * 角色列表
+     * 订单列表
      * @return
      */
     @RequestMapping(value="/list",method=RequestMethod.GET)

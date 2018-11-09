@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.admin.dao.ShipmentDao" >
+	<!---->
+	<!--<select id="list"  resultType="pm">-->
+		<!--SELECT-->
+			<!--senter,-->
+			<!--senter_phone,-->
+			<!--sent_address,-->
+			<!--sent_addmsg,-->
+			<!--collecter,-->
+			<!--collect_phone,-->
+			<!--collect_address,-->
+			<!--collect_addmsg,-->
+			<!--weight,-->
+			<!--note,-->
+			<!--order_number,-->
+			<!--price,-->
+			<!--salesman_id,-->
+			<!--shipment_status-->
+		<!--from -->
+			<!--sys_order-->
+	<!--</select>-->
+	<!---->
+	<!--<select id="getShipmentById" parameterType="pm"  resultType="pm">-->
+			<!--SELECT-->
+			<!--role_id,-->
+			<!--role_name,-->
+			<!--role_desc,-->
+			<!--rights,-->
+			<!--add_qx,-->
+			<!--del_qx,-->
+			<!--edit_qx,-->
+			<!--query_qx-->
+		<!--from-->
+			<!--sys_role-->
+		<!--where-->
+			<!--role_id=#{role_id}-->
+	<!--</select>-->
+	<!---->
+	<!--<select id="getShipmentByuId" parameterType="pm"  resultType="pm">-->
+		<!--SELECT -->
+			<!--id,-->
+			<!--user_id,-->
+			<!--role_id-->
+		<!--from -->
+			<!--sys_user_role -->
+		<!--where -->
+			<!--user_id=#{user_id}-->
+	<!--</select>-->
+	<!---->
+	<!--<update id="updateShipmentQX" parameterType="pm">-->
+		<!--update sys_order set-->
+			<!--order_id=#{order_id}-->
+			<!--<if test="salesman_id != null and salesman_id != ''">-->
+				<!--,salesman_id = #{salesman_id}-->
+			<!--</if>-->
+			<!--<if test="shipment_status != null and shipment_status != ''">-->
+				<!--,shipment_status = #{shipment_status}-->
+			<!--</if>-->
+			<!--where 1=1 and order_id=#{order_id}-->
+	<!--</update>-->
+	<!---->
+	<insert id="addShipment" parameterType="pm">
+		insert into sys_shipment(
+			order_id,
+			order_number,
+			`status`,
+			address,
+			mark,
+			receive_date,
+			create_time
+		)values(
+			#{order_id},
+			#{order_number},
+			#{status},
+			#{address},
+			#{mark},
+			#{receive_date},
+			#{create_time}
+		)
+	</insert>
+	
+	<select id="getAllShipmentList" parameterType="pm" resultType="pm">
+		SELECT * from sys_shipment 
+		where 
+		1=1
+		<if test="order_id != null and order_id != ''">
+			and (order_id=#{order_id} or order_number=#{order_id})
+		</if>
+		ORDER BY 
+			receive_date asc,create_time asc
+	</select>
+	
+	<!---->
+	<!--<delete id="delShipment" parameterType="pm">-->
+		<!--delete from sys_order where order_id=#{order_id}-->
+	<!--</delete>-->
+	<!--<delete id="delUserShipment" parameterType="pm">-->
+		<!--delete from sys_user_role where role_id=#{role_id}-->
+	<!--</delete>-->
+ <!---->
+</mapper>

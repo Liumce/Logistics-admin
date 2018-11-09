@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="include/css-head :: css-head">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<style>
+    textarea{
+        width:100%;
+        height:100px;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .chk_1{
+        display: none;
+    }
+    .chk_1 + label {
+        background-color: #FFF;
+        border: 1px solid #C1CACA;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 5px;
+        display: inline-block;
+        position: relative;
+        margin-right: 30px;
+    }
+    .chk_1 + label:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .chk_1:checked + label {
+        background-color: #ECF2F7;
+        border: 1px solid #92A1AC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        color: #243441;
+    }
+
+    .chk_1:checked + label:after {
+        content: '\2714';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #758794;
+        width: 100%;
+        text-align: center;
+        font-size: 1.4em;
+        padding: 1px 0 0 0;
+        vertical-align: text-top;
+    }
+    div.cbp label.font{
+        text-align: center;
+        font-size: 1.4em;
+        vertical-align: text-top;
+        margin-top: -15px;
+        margin-left: -10px;
+    }
+
+    .top h3{
+        color:dodgerblue;
+        margin-bottom:1%;
+    }
+    .input-group{
+        margin-top: 2em;
+    }
+    .btn{
+        margin:5% 15%;
+    }
+    .test{
+        padding: 10px;
+
+    }
+    .test hr{
+        border: 1.5px solid dodgerblue;
+
+
+    }
+</style>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        西游记告诉我们：凡是有后台的妖怪都被接走了，
+        <small>凡是没后台的都被一棒子打死了</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 业务管理</a></li>
+        <li class="active">物流下单</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">物流下单</h3>
+            <br><br>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <form action="" method="post">
+                    <div class="top">
+                        <h3> ◆ 网上寄件 ◆<small>上门取件时间以客服电话确认为准。</small></h3>
+                    </div>
+                    <div class="test">
+                        <h4 class="pull-left">寄件人信息</h4>
+                        <hr  width="90%" class="pull-right">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">寄件人</span>
+                                <input type="text" class="form-control" placeholder="请输入寄件人" name="senter" required="" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">手机(固话)</span>
+                                <input type="text" class="form-control" placeholder="请输入手机号码" name="senter_phone" required=""  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">上门地址</span>
+                                <input type="text" class="form-control" required="" name="sent_address">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">详细地址</span>
+                                <input type="text" class="form-control" required=""  name="sent_addmsg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test">
+                        <h4 class="pull-left">收件人信息</h4>
+                        <hr width="90%" class="pull-right">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">收件人姓名</span>
+                                <input type="text" class="form-control" required="" name="collecter" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">手机(固话)</span>
+                                <input type="text" class="form-control" required="" name="collect_phone"  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">上门地址</span>
+                                <input type="text" class="form-control" required="" name="collect_address">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">详细地址</span>
+                                <input type="text" class="form-control" required="" name="collect_addmsg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test">
+                        <h4 class="pull-left">物品信息</h4>
+                        <hr width="90%" class="pull-right">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">物品重量</span>
+                                <select class="form-control" required="" id="weight" name="weight">
+                                    <option value="请选择重量" checked>请选择重量</option>
+                                    <option value="1">2公斤以下</option>
+                                    <option value="2">2公斤-5公斤</option>
+                                    <option value="3">5公斤以上</option>
+                                </select>
+                            </div><!-- /input-group -->
+                            <div class="input-group">
+                                <span class="input-group-addon">备注</span>
+                                <textarea  class="form-control" placeholder="易碎品、液体、贵重物品等请特别说明" name="note" id="note" required=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 新增或修改的模态框 -->
+                        <button  class="btn btn-primary" type="submit" id="submit-orderId">确认订单</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--&lt;!&ndash; 权限分配的模态框 &ndash;&gt;-->
+<!--<div class="modal fade" id="qxModal" tabindex="-1" role="dialog"-->
+     <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-body">-->
+                <!--<div class="zTreeDemoBackground left">-->
+                    <!--<ul id="orderTree" class="ztree"></ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-success" id="submit-smBtn" >下单</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.core.js}"></script>
+<script th:src="@{/ztree/js/jquery.ztree.excheck.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+<script th:src="@{/js/query.js}"></script>
+<script th:src="@{/dist/js/demo.js}"></script>
+<script th:src="@{/js/city.js}"></script>
+<script th:src="@{/jquery/jquery.js}"></script>
+<script th:src="@{/js/order.js}"></script>
+
+<!--
+<script>
+    $(function(){
+        //提示框
+        $("[data-toggle='tooltip']").tooltip();
+        //表格分页
+        $('#roleList').DataTable({
+            "scrollX"	  : true,
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false,
+            "pagingType"  : "full_numbers",
+            "pageLength"  : 10
+        });
+
+        $("#addUser").click(function(){
+            reloadModelData(_ctx+"/user/add","添加用户","添加","","","","","","","add");
+            $("#userModal").modal("show");
+        });
+
+
+    //加载模态框的数据
+    function reloadModelData(url,title,btntext,user_id,pics,oldpath,username,nick_name,password,type){
+        $("#userModal #usermodelHead").text(title);
+        $("#userModal #imgSubmit").text(btntext);
+        $("#showImg").attr("src",oldpath);
+        $("input[name='url']").val(url);
+        $("input[name='user_id']").val(user_id);
+        $("input[name='pics']").val(pics);
+        $("input[name='oldpath']").val(oldpath);
+        $("input[name='username']").val(username);
+        $("input[name='nick_name']").val(nick_name);
+        $("input[name='password']").val(password);
+        if(type == 'add'){
+            $("input[name='username']").attr("disabled",false);
+        }else{
+            $("input[name='username']").attr("disabled",true);
+        }
+    }
+
+    var input = document.getElementById("imgfile");
+    if (typeof (FileReader) === 'undefined') {
+        result.innerHTML = "抱歉，你的浏览器不支持 FileReader，请使用现代浏览器操作！";
+        input.setAttribute('disabled', 'disabled');
+    } else {
+        input.addEventListener('change', readFile, false);
+    }
+    function readFile() {
+        var file = this.files[0];
+        //判断是否是图片类型
+        if (!/image\/\w+/.test(file.type)) {
+            alert("只能选择图片");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            base64Code=this.result;
+            $("#userModal input[name='pics']").val(this.result);
+            $("#showImg").attr("src",this.result);
+        }
+    }
+</script>
+-->
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+  <head th:fragment="css-head">
+  <meta charset="utf-8">
+  <meta name="_ctx" th:content="@{/}" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>物流</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  
+  <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}">
+  <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+  	.timeBg{
+  		width: 800px;
+  		margin: 10px auto;
+  	}
+  	.searchOrder{
+  		cursor:pointer;
+  	}
+  </style>
+  </head>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    	西游记告诉我们：凡是有后台的妖怪都被接走了，
+    <small>凡是没后台的都被一棒子打死了</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 业务管理</a></li>
+    <li class="active">货物追踪</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+<div style="margin: 10px auto;width: 800px;">
+	<div class="input-group input-group-lg">
+         <input type="text" th:if="${#lists.isEmpty(order_id)}"  value="2018103142137" id="orderId" class="form-control" placeholder="请输入订单ID，查询物流 ">
+         <input type="text" th:unless="${#lists.isEmpty(order_id)}" th:value="${order_id}" value="2018103142137" id="orderId" class="form-control" placeholder="请输入订单ID，查询物流 ">
+         <span class="input-group-addon searchOrder"><i class="fa fa-search"></i></span>
+     </div>
+</div>
+<div class="timeBg">
+	  <div th:unless="${#lists.isEmpty(list)}" class="timeline animated" th:each="item:${list}">  
+	      <div class="timeline-row">
+	        <div class="timeline-time">
+	          <small th:if="${item.status == 0}">已发货</small>
+	          <small th:if="${item.status == 1}">已揽件</small>
+	          <small th:if="${item.status == 2}">在路上</small>
+	          <small th:if="${item.status == 3}">已签收</small>
+	          <span th:text="${item.receive_date}"></span>
+	        </div>
+	        <div class="timeline-icon">
+	          <div class="bg-primary">
+	            <i class="fa fa-pencil"></i>
+	          </div>
+	        </div>
+	        <div class="panel timeline-content">
+	          <div class="panel-body">
+	            <h3 th:text="${item.address}"></h3>
+	            <p th:text="${item.mark}"></p>
+	          </div>
+	        </div>
+	      </div>
+      </div>
+      </div>
+</section>
+
+
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>	
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+<script th:src="@{/js/time.js}"></script>
+<script>
+$(function(){
+	$(".searchOrder").click(function(){
+		var orderId = $("#orderId").val();
+		if(orderId == ""){
+			alert("订单ID 不能为空")
+			return false;
+		}else{			
+			window.location.href = _ctx+"/shipment/querylist?order_id="+orderId;
+		}
+	});
+	
+})
+</script>
+</body>
+</html>

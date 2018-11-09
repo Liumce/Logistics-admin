@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.admin.dao.TransferDao" >
+	
+	<select id="list"  resultType="pm">
+		SELECT
+			senter,
+			senter_phone,
+			sent_address,
+			sent_addmsg,
+			collecter,
+			collect_phone,
+			collect_address,
+			collect_addmsg,
+			weight,
+			note,
+			order_number,
+			order_id,
+			price,
+			salesman_id,
+			shipment_status
+		from
+			sys_order
+	</select>
+	
+	<select id="getTransferById" parameterType="pm"  resultType="pm">
+			SELECT
+			role_id,
+			role_name,
+			role_desc,
+			rights,
+			add_qx,
+			del_qx,
+			edit_qx,
+			query_qx
+		from
+			sys_role
+		where
+			role_id=#{role_id}
+	</select>
+	
+	<select id="getTransferByuId" parameterType="pm"  resultType="pm">
+		SELECT 
+			id,
+			user_id,
+			role_id
+		from 
+			sys_user_role 
+		where 
+			user_id=#{user_id}
+	</select>
+	
+	<update id="updateTransferQX" parameterType="pm">
+		update sys_order set
+			order_id=#{order_id}
+			<if test="salesman_id != null and salesman_id != ''">
+				,salesman_id = #{salesman_id}
+			</if>
+			<if test="shipment_status != null and shipment_status != ''">
+				,shipment_status = #{shipment_status}
+			</if>
+			where 1=1 and order_id=#{order_id}
+	</update>
+	
+	<insert id="addTransfer" parameterType="pm">
+		insert into sys_order(
+			salesman_id
+		)values(
+			#{salesman_id}
+		)
+	</insert>
+	
+	<delete id="delTransfer" parameterType="pm">
+		delete from sys_order where order_id=#{order_id}
+	</delete>
+	<delete id="delUserTransfer" parameterType="pm">
+		delete from sys_user_role where role_id=#{role_id}
+	</delete>
+ 
+</mapper>

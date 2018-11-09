@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="include/css-head :: css-head">
+</head>
+<body>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    	西游记告诉我们：凡是有后台的妖怪都被接走了，
+    <small>凡是没后台的都被一棒子打死了</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 业务管理</a></li>
+    <li class="active">中转中心</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+	 <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">订单列表</h3>
+              <br><br>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="shipmentList" class="table table-bordered table-striped">
+                <thead>
+	                <tr>
+						<th>订单编号</th>
+						<th>寄件人</th>
+						<th>上门地址</th>
+						<th>收件人</th>
+						<th>上门地址</th>
+						<th>接单员编号</th>
+						<th>操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+				<tr th:if="${QX.query == '1'}" th:each="transfer,stat :${shipments}">
+					<td th:text="${transfer.order_number}">订单编号</td>
+					<td th:text="${transfer.senter}">寄件人</td>
+					<td th:text="${transfer.sent_address}">上门地址</td>
+					<td th:text="${transfer.collecter}">收件人</td>
+					<td th:text="${transfer.collect_address}">上门地址</td>
+					<td th:text="${transfer.salesman_id}">接单员编号</td>
+					<td>
+						<div th:switch="${transfer.shipment_status}">
+							<span th:case="1" class="btn btn-info" th:attr="orderid=${transfer.order_id}" th:onclick="'add(\''+${transfer.order_id}+'\',\''+${transfer.order_number}+'\');'" >中转</span>
+							<span th:case="3" class="label label-info" >已签收</span>
+							<span th:case="*" class="label label-info" >未接单</span>
+						</div>
+
+                    </td>
+				</tr>
+				<tr th:unless="${QX.query == '1'}" >
+					<td colspan="7" align="center">
+						<h2>此用户无权限查看该页面</h2>
+					</td>
+				</tr>
+                </tbody>
+                </table>
+                </div>
+</section>
+
+<div class="modal fade" id="shipmentModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center" id="modelHead">添加中转</h4>
+			</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						<input type="hidden" name="order_id" value="0"/>
+						<input type="hidden" name="shipment_status" value="0"/>
+					  <div class="form-group">
+					    <label for="shipment_status" class="col-sm-2 control-label">物流状态</label>
+					    <div class="col-sm-10">
+					      	<select class="form-control" id="status">
+					      		<option value="0">已发货</option>
+					      		<option value="1">已揽件</option>
+					      		<option value="2">在路上</option>
+					      		<option value="3">已签收</option>
+					      	</select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="shipment_status" class="col-sm-2 control-label">中转地址</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="address" value="" id="address" placeholder="请输入">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="shipment_status" class="col-sm-2 control-label">备注</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="mark" value="" id="mark" placeholder="请输入">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="shipment_status" class="col-sm-2 control-label">中转时间</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="receive_date" value="" id="receive_date" placeholder="如果不输入，则默认是当前时间">
+					    </div>
+					  </div>
+					  
+					 </form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-success" id="submitBtn" >添加</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>	
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<script th:src="@{/js/path.js}"></script>
+<script th:src="@{/js/menu.js}"></script>
+<script th:src="@{/js/shipment.js}"></script>
+
+<script>
+var orderId="";
+var orderNumber="";
+$(function(){
+	
+	
+	$("#submitBtn").click(function(){
+		$.ajax({
+            type: "post",
+            url: _ctx+"/shipment/add",
+            cache: false,
+            dataType: "json",
+            data: {order_id: orderId,order_number:orderNumber, status: $("#status").val(),address:$("#address").val(),mark:$("#mark").val(),receive_date:$("#receive_date").val(),t_:new Date().getTime()},
+            success: function (data) {
+                if (data.status == 'success') {
+                    window.location.href = window.location.href;
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+	});
+})
+
+function add(orderId,orderNumber){
+	 $("#shipmentModal").modal("show");
+	 this.orderId = orderId;
+	 this.orderNumber=orderNumber;
+}
+</script>
+</body>
+</html>
