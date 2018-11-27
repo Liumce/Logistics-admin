@@ -44,7 +44,7 @@
 <section class="content">
 <div style="margin: 10px auto;width: 800px;">
 	<div class="input-group input-group-lg">
-         <input type="text" th:if="${#lists.isEmpty(order_id)}"  value="2018103142137" id="orderId" class="form-control" placeholder="请输入订单ID，查询物流 ">
+         <input type="text" th:if="${#lists.isEmpty(order_id)}"  value="" id="orderId" class="form-control" placeholder="请输入订单ID，查询物流 ">
          <input type="text" th:unless="${#lists.isEmpty(order_id)}" th:value="${order_id}" value="2018103142137" id="orderId" class="form-control" placeholder="请输入订单ID，查询物流 ">
          <span class="input-group-addon searchOrder"><i class="fa fa-search"></i></span>
      </div>

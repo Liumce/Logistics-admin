@@ -401,25 +401,25 @@ function checkAccount(username,nickName,password){
 	}
 	return true;
 }
-//
-////加载模态框的数据
-//function reloadModelData(url,title,btntext,user_id,pics,oldpath,username,nick_name,password,type){
-//	$("#userModal #usermodelHead").text(title);
-//	$("#userModal #imgSubmit").text(btntext);
-//	$("#showImg").attr("src",oldpath);
-//	$("input[name='url']").val(url);
-//	$("input[name='user_id']").val(user_id);
-//	$("input[name='pics']").val(pics);
-//	$("input[name='oldpath']").val(oldpath);
-//	$("input[name='username']").val(username);
-//	$("input[name='nick_name']").val(nick_name);
-//	$("input[name='password']").val(password);
-//	if(type == 'add'){
-//		$("input[name='username']").attr("disabled",false);
-//	}else{
-//		$("input[name='username']").attr("disabled",true);
-//	}
-//}
+
+//加载模态框的数据
+function reloadModelData(url,title,btntext,user_id,pics,oldpath,username,nick_name,password,type){
+	$("#userModal #usermodelHead").text(title);
+	$("#userModal #imgSubmit").text(btntext);
+	$("#showImg").attr("src",oldpath);
+	$("input[name='url']").val(url);
+	$("input[name='user_id']").val(user_id);
+	$("input[name='pics']").val(pics);
+	$("input[name='oldpath']").val(oldpath);
+	$("input[name='username']").val(username);
+	$("input[name='nick_name']").val(nick_name);
+	$("input[name='password']").val(password);
+	if(type == 'add'){
+		$("input[name='username']").attr("disabled",false);
+	}else{
+		$("input[name='username']").attr("disabled",true);
+	}
+}
 
 var input = document.getElementById("imgfile");
  if (typeof (FileReader) === 'undefined') {

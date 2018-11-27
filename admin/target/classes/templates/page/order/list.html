@@ -120,7 +120,7 @@
         </div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <form action="" method="post">
+                <form action="" method="post" id="form">
                     <div class="top">
                         <h3> ◆ 网上寄件 ◆<small>上门取件时间以客服电话确认为准。</small></h3>
                     </div>
@@ -132,19 +132,19 @@
                         <div class="col-md-5">
                             <div class="input-group">
                                 <span class="input-group-addon">寄件人</span>
-                                <input type="text" class="form-control" placeholder="请输入寄件人" name="senter" required="" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
+                                <input type="text" id="senter" class="form-control" required placeholder="请输入寄件人" name="senter" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">手机(固话)</span>
-                                <input type="text" class="form-control" placeholder="请输入手机号码" name="senter_phone" required=""  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
+                                <input type="text" class="form-control" placeholder="请输入手机号码" name="senter_phone" required  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">上门地址</span>
-                                <input type="text" class="form-control" required="" name="sent_address">
+                                <input type="text" class="form-control" placeholder="(省、市、区(县))" required name="sent_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">详细地址</span>
-                                <input type="text" class="form-control" required=""  name="sent_addmsg">
+                                <input type="text" class="form-control" required placeholder="(街道、门牌号)"  name="sent_addmsg" >
                             </div>
                         </div>
                     </div>
@@ -155,20 +155,20 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div class="input-group">
-                                <span class="input-group-addon">收件人姓名</span>
-                                <input type="text" class="form-control" required="" name="collecter" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
-                            </div>
+                            <span class="input-group-addon">收件人姓名</span>
+                            <input type="text" class="form-control" required name="collecter" placeholder="请输入收件人" pattern="[\u4e00-\u9fa5]{2,4}" title="请输入规范姓名">
+                        </div>
                             <div class="input-group">
                                 <span class="input-group-addon">手机(固话)</span>
-                                <input type="text" class="form-control" required="" name="collect_phone"  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
+                                <input type="text" class="form-control" required name="collect_phone" placeholder="请输入手机电话" pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">上门地址</span>
-                                <input type="text" class="form-control" required="" name="collect_address">
+                                <input type="text" class="form-control" placeholder="(省、市、区(县))" required name="collect_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">详细地址</span>
-                                <input type="text" class="form-control" required="" name="collect_addmsg">
+                                <input type="text" class="form-control" required name="collect_addmsg" placeholder="(街道、门牌号)">
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <!-- 新增或修改的模态框 -->
-                        <button  class="btn btn-primary" type="submit" id="submit-orderId">确认订单</button>
+                        <button  class="btn btn-primary" type="submit" id="submit-orderId" onclick="check()">确认订单</button>
 
                 </form>
             </div>
@@ -218,6 +218,15 @@
         <!--</div>-->
     <!--</div>-->
 <!--</div>-->
+<script>
+    function check() {
+        var id = document.getElementById("senter");
+        var obj = id.value;
+        if (obj == "") {
+            alert("不能乱填喔！");
+        }
+    }
+</script>
 
 <script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>

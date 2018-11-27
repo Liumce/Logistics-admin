@@ -106,7 +106,7 @@ $(function(){
 			rate = 20;
 		}
 		var price = Number(weight)*rate;
-		if(confirm("这个订单的价格为："+price+" ，你确定要保存订单吗？")){
+		if(confirm("这个订单的价格为："+price+" ，你确定要保存订单吗？提交后请到系统帮助支付您的订单费用，谢谢!")){
             $.ajax({
                 type:"POST",
                 cache:false,
@@ -125,7 +125,5 @@ $(function(){
                 }
             });
 		}
-
-
 	})
 })
