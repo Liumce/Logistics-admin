@@ -11,6 +11,9 @@ import com.liu.admin.entity.Const;
 import com.liu.admin.entity.User;
 import com.liu.admin.util.Jurisdiction;
 
+/**
+ * URL拦截器
+ */
 public class UrlInterceptor implements HandlerInterceptor{
 
 	@Override

@@ -54,7 +54,7 @@
 			</if>
 			<if test="rights != null and rights != ''">
 				,rights = #{rights}
-			</if>
+			</if>+
 			<if test="add_qx != null and add_qx != ''">
 				,add_qx = #{add_qx}
 			</if>

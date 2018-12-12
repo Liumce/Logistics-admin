@@ -83,11 +83,13 @@ $(function(){
 		var orderId = $("input[name='order_id']").val();
 		var senter = $("input[name='senter']").val();
 		var senterPhone = $("input[name='senter_phone']").val();
-		var sentAddress = $("input[name='sent_address']").val();
+		// var sentAddress = $("select[name='input_province']+select[name='input_city']+select[name='input_area']").val();
+		var sentAddress = $("select[name='sent.province+sent.city+sent.area']").val();
 		var sentAddMsg = $("input[name='sent_addmsg']").val();
 		var collecter = $("input[name='collecter']").val();
 		var collectPhone = $("input[name='collect_phone']").val();
-		var collectAddress = $("input[name='collect_address']").val();
+		// var collectAddress = $("input[name='collect_address']").val();
+		var collectAddress = $("input[name='coll.province+coll.city+coll.area']").val();
 		var collectAddMsg = $("input[name='collect_addmsg']").val();
 		var weight = $("#weight").val();
 		var note = $("#note").val();
@@ -99,21 +101,24 @@ $(function(){
 		if(weight == '1'){
 			rate = 10;
 		}else if(weight == '2'){
-			rate = 20;
+			rate = 20;0
 		}else if(weight == '3'){
 			rate = 30;
 		}else{
 			rate = 20;
 		}
 		var price = Number(weight)*rate;
+
+		//alert(sent.province+sent.city+sent.area);
+
 		if(confirm("这个订单的价格为："+price+" ，你确定要保存订单吗？提交后请到系统帮助支付您的订单费用，谢谢!")){
             $.ajax({
                 type:"POST",
                 cache:false,
                 url:_ctx+"/order/add",
                 dataType:"json",
-                data:{order_id:orderId,senter:senter,senter_phone:senterPhone,sent_address:sentAddress,
-                    sent_addmsg:sentAddMsg,collecter:collecter,collect_phone:collectPhone,collect_address:collectAddress,
+                data:{order_id:orderId,senter:senter,senter_phone:senterPhone,sent_address:sent.province+sent.city+sent.area,
+                    sent_addmsg:sentAddMsg,collecter:collecter,collect_phone:collectPhone,collect_address:coll.province+coll.city+coll.area,
                     collect_addmsg:collectAddMsg,weight:weight,note:note,salesman_id:salesmanId,price:price},
                 success:function(data){
                     if(data.status == 'success'){

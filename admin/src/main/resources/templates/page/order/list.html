@@ -138,10 +138,32 @@
                                 <span class="input-group-addon">手机(固话)</span>
                                 <input type="text" class="form-control" placeholder="请输入手机号码" name="senter_phone" required  pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
                             </div>
-                            <div class="input-group">
+                            <!--<div class="input-group">-->
+                                <!--<span class="input-group-addon">上门地址</span>-->
+                                <!--<input type="text" class="form-control" placeholder="(省、市、区(县))" required name="sent_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">-->
+                            <!--</div>-->
+
+                            <!--  省市区三级联动 begin -->
+                            <div class="input-group" id="addressFrom">
                                 <span class="input-group-addon">上门地址</span>
-                                <input type="text" class="form-control" placeholder="(省、市、区(县))" required name="sent_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">
+                                <div class="col-sm-3">
+                                    <select name="input_province" id="input_province" class="form-control" style="width: 100px" >
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="input_city" id="input_city" class="form-control" style="width: 100px" >
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="input_area" id="input_area" class="form-control" style="width: 100px" >
+                                        <option value=""></option>
+                                    </select>
+                                </div>
                             </div>
+
+                            <!-- 省市区三级联动  end-->
                             <div class="input-group">
                                 <span class="input-group-addon">详细地址</span>
                                 <input type="text" class="form-control" required placeholder="(街道、门牌号)"  name="sent_addmsg" >
@@ -162,17 +184,37 @@
                                 <span class="input-group-addon">手机(固话)</span>
                                 <input type="text" class="form-control" required name="collect_phone" placeholder="请输入手机电话" pattern="[1](3|5|7|8|9)\d{9}" title="输入有误">
                             </div>
-                            <div class="input-group">
+                            <!--  省市区三级联动 begin -->
+                            <div class="input-group" id="addressFrom2">
                                 <span class="input-group-addon">上门地址</span>
-                                <input type="text" class="form-control" placeholder="(省、市、区(县))" required name="collect_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">
+                                <div class="col-sm-3">
+                                    <select name="input_province" id="input_collprovince" class="form-control" style="width: 100px" >
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="input_city" id="input_collcity" class="form-control" style="width: 100px" >
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="input_area" id="input_collarea" class="form-control" style="width: 100px" >
+                                        <option value=""></option>
+                                    </select>
+                                </div>
                             </div>
+
+                            <!-- 省市区三级联动  end-->
                             <div class="input-group">
                                 <span class="input-group-addon">详细地址</span>
                                 <input type="text" class="form-control" required name="collect_addmsg" placeholder="(街道、门牌号)">
                             </div>
                         </div>
                     </div>
-                    <div class="test">
+                    <div class="test"> <div class="input-group">
+                        <!--<span class="input-group-addon">上门地址</span>-->
+                        <!--<input type="text" class="form-control" placeholder="(省、市、区(县))" required name="collect_address" pattern="[\u4E00-\u9FFF]+" title="请规范输入(省市区县)">-->
+                    <!--</div>-->
                         <h4 class="pull-left">物品信息</h4>
                         <hr width="90%" class="pull-right">
                     </div>
@@ -240,6 +282,151 @@
 <script th:src="@{/js/city.js}"></script>
 <script th:src="@{/jquery/jquery.js}"></script>
 <script th:src="@{/js/order.js}"></script>
+<!-- 三级联动 begin -->
+<script th:src="@{/js/address.js}"></script>
+<script th:src="@{/jquery/jquery.js}"></script>
+
+<script>
+    var sent = {};
+
+    $('#input_province').change(function(){
+        var province = ($(this).children('option:selected').text());
+        sent.province = province;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+    $('#input_city').change(function(){
+        var city = ($(this).children('option:selected').text());
+        sent.city = city;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+    $('#input_area').change(function(){
+        var area = ($(this).children('option:selected').text());
+        sent.area = area;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+
+//    alert(Element.getElementById(sent.a).textContent);
+
+
+    var coll = {};
+
+    $('#input_collprovince').change(function(){
+        var province = ($(this).children('option:selected').text());
+        coll.province = province;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+    $('#input_collcity').change(function(){
+        var city = ($(this).children('option:selected').text());
+        coll.city = city;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+    $('#input_collarea').change(function(){
+        var area = ($(this).children('option:selected').text());
+        coll.area = area;
+//        var p1=$(this).children('option:selected').val();//这就是selected的值
+//        var p2=$('#param2').val();//获取本页面其他标签的值
+//        window.location.href="xx.php?param1="+p1+"m2="+p2+"";//页面跳转并传参
+    })
+
+    $(function () {
+        var html = "";
+        $("#input_city").append(html);
+        $("#input_area").append(html);
+        $.each(pdata,function(idx,item){
+            if (parseInt(item.level) == 0) {
+                html += "<option value="+item.code+" >"+ item.names +"</option> ";
+            }
+        });
+        $("#input_province").append(html);
+
+        $("#input_province").change(function(){
+            if ($(this).val() == "") return;
+            $("#input_city option").remove();
+            $("#input_area option").remove();
+            //var code = $(this).find("option:selected").attr("exid");
+            var code = $(this).find("option:selected").val();
+            code = code.substring(0,2);
+            var html = "<option value=''>--请选择--</option>";
+            $("#input_area option").append(html);
+            $.each(pdata,function(idx,item){
+                if (parseInt(item.level) == 1 && code == item.code.substring(0,2)) {
+                    html +="<option value="+item.code+" >"+ item.names +"</option> ";
+                }
+            });
+            $("#input_city ").append(html);
+        });
+
+        $("#input_city").change(function(){
+            if ($(this).val() == "") return;
+            $("#input_area option").remove();
+            var code = $(this).find("option:selected").val();
+            code = code.substring(0,4);
+            var html = "<option value=''>--请选择--</option>";
+            $.each(pdata,function(idx,item){
+                if (parseInt(item.level) == 2 && code == item.code.substring(0,4)) {
+                    html +="<option value="+item.code+" >"+ item.names +"</option> ";
+                }
+            });
+            $("#input_area ").append(html);
+        });
+    });
+
+
+
+    $(function () {
+        var html = "";
+        $("#input_collcity").append(html);
+        $("#input_collarea").append(html);
+        $.each(pdata,function(idx,item){
+            if (parseInt(item.level) == 0) {
+                html += "<option value="+item.code+" >"+ item.names +"</option> ";
+            }
+        });
+        $("#input_collprovince").append(html);
+
+        $("#input_collprovince").change(function(){
+            if ($(this).val() == "") return;
+            $("#input_collcity option").remove();
+            $("#input_collarea option").remove();
+            //var code = $(this).find("option:selected").attr("exid");
+            var code = $(this).find("option:selected").val();
+            code = code.substring(0,2);
+            var html = "<option value=''>--请选择--</option>";
+            $("#input_collarea option").append(html);
+            $.each(pdata,function(idx,item){
+                if (parseInt(item.level) == 1 && code == item.code.substring(0,2)) {
+                    html +="<option value="+item.code+" >"+ item.names +"</option> ";
+                }
+            });
+            $("#input_collcity ").append(html);
+        });
+
+        $("#input_collcity").change(function(){
+            if ($(this).val() == "") return;
+            $("#input_collarea option").remove();
+            var code = $(this).find("option:selected").val();
+            code = code.substring(0,4);
+            var html = "<option value=''>--请选择--</option>";
+            $.each(pdata,function(idx,item){
+                if (parseInt(item.level) == 2 && code == item.code.substring(0,4)) {
+                    html +="<option value="+item.code+" >"+ item.names +"</option> ";
+                }
+            });
+            $("#input_collarea ").append(html);
+        });
+    });
+</script>
+<!-- 三级联动 end -->
 
 <!--
 <script>

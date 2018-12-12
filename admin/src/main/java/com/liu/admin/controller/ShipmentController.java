@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 中转
+ */
 @Controller
 @RequestMapping("/shipment")
 public class ShipmentController extends BaseController{
