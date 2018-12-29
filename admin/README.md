@@ -31,6 +31,8 @@
 
 ### ![TIM图片20181009162033](C:\Users\lenovo\Desktop\TIM图片20181009162033.png)
 
+### 数据库	
+	admin.sql  仅结构sql，内容自行添加
 
 
 
