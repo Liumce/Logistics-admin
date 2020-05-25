@@ -3,7 +3,7 @@ package com.liu.admin.util;
 import java.math.BigInteger;
 
 /**
- * @author liumce
+ * @author Administrator
  * 权限计算帮助类
  */
 public class RightsHelper {

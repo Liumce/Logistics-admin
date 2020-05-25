@@ -14,7 +14,7 @@ import com.liu.admin.plugin.Page;
 /**
  * 拦截所有参数
  * 
- * @author liumce
+ * @author Administrator
  *
  */
 @SuppressWarnings("rawtypes")

@@ -16,15 +16,9 @@ public class Order {
     private String weight;
     private String note;
     private Integer salesmanId;
-    private String inputProvince;
-    private String inputCity;
-    private String inputArea;
 
-    private String inputCollProvince;
-    private String inputCollCity;
-    private String inputCollArea;
 
-    public Order(Integer orderId, String senter, String senterPhone, String sentAddress, String sentAddMsg, String collecter, String collectPhone, String collectAddress, String weight, String note, Integer salesmanId, String inputProvince, String inputCity, String inputArea, String inputCollProvince, String inputCollCity, String inputCollArea) {
+    public Order(Integer orderId, String senter, String senterPhone, String sentAddress, String sentAddMsg, String collecter, String collectPhone, String collectAddress, String weight, String note, Integer salesmanId) {
         this.orderId = orderId;
         this.senter = senter;
         this.senterPhone = senterPhone;
@@ -36,12 +30,6 @@ public class Order {
         this.weight = weight;
         this.note = note;
         this.salesmanId = salesmanId;
-        this.inputProvince = inputProvince;
-        this.inputCity = inputCity;
-        this.inputArea = inputArea;
-        this.inputCollProvince = inputCollProvince;
-        this.inputCollCity = inputCollCity;
-        this.inputCollArea = inputCollArea;
     }
 
     public Integer getOrderId() {
@@ -132,54 +120,6 @@ public class Order {
         this.salesmanId = salesmanId;
     }
 
-    public String getInputProvince() {
-        return inputProvince;
-    }
-
-    public void setInputProvince(String inputProvince) {
-        this.inputProvince = inputProvince;
-    }
-
-    public String getInputCity() {
-        return inputCity;
-    }
-
-    public void setInputCity(String inputCity) {
-        this.inputCity = inputCity;
-    }
-
-    public String getInputArea() {
-        return inputArea;
-    }
-
-    public void setInputArea(String inputArea) {
-        this.inputArea = inputArea;
-    }
-
-    public String getInputCollArea() {
-        return inputCollArea;
-    }
-
-    public void setInputCollArea(String inputCollArea) {
-        this.inputCollArea = inputCollArea;
-    }
-
-    public String getInputCollProvince() {
-        return inputCollProvince;
-    }
-
-    public void setInputCollProvince(String inputCollProvince) {
-        this.inputCollProvince = inputCollProvince;
-    }
-
-    public String getInputCollCity() {
-        return inputCollCity;
-    }
-
-    public void setInputCollCity(String inputCollCity) {
-        this.inputCollCity = inputCollCity;
-    }
-
     @Override
     public String toString() {
         return "Order{" +
@@ -194,12 +134,6 @@ public class Order {
                 ", weight='" + weight + '\'' +
                 ", note='" + note + '\'' +
                 ", salesmanId=" + salesmanId +
-                ", inputProvince='" + inputProvince + '\'' +
-                ", inputCity='" + inputCity + '\'' +
-                ", inputArea='" + inputArea + '\'' +
-                ", inputCollProvince='" + inputCollProvince + '\'' +
-                ", inputCollCity='" + inputCollCity + '\'' +
-                ", inputCollArea='" + inputCollArea + '\'' +
                 '}';
     }
 }
